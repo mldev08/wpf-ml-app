@@ -1,0 +1,98 @@
+﻿<Window x:Class="progress.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        Title="МЦД"
+        Height="500"
+        Width="1040"
+        Background="#f4f4f4"
+        WindowStartupLocation="CenterScreen">
+
+    <Window.Resources>
+        <!-- Стиль для кнопок -->
+        <Style TargetType="Button">
+            <Setter Property="Background" Value="#1E3A5F" />
+            <Setter Property="Foreground" Value="White" />
+            <Setter Property="Padding" Value="10" />
+            <Setter Property="Margin" Value="5" />
+            <Setter Property="BorderBrush" Value="#1B2E45" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="FontSize" Value="14" />
+            <Setter Property="HorizontalAlignment" Value="Stretch" />
+            <Setter Property="Cursor" Value="Hand" />
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#2A4B74" />
+                    <Setter Property="BorderBrush" Value="#324A64" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </Window.Resources>
+
+    <DockPanel>
+        <!-- Слайд-бар -->
+        <StackPanel Background="#1E3A5F" Width="200" DockPanel.Dock="Left">
+            <TextBlock Text="Меню" FontSize="20" Foreground="White" Margin="10" />
+            <Button Content="Основной экран" Name="MainScreenButton"/>
+
+        </StackPanel>
+
+        <!-- Основной контент -->
+        <Grid Name="MainContentArea" Background="#ffffff">
+            <!-- Основной экран -->
+            <Grid Name="MainScreen" Visibility="Visible">
+                <!-- Верхняя панель -->
+                <DockPanel Background="#2A4B74" Height="50" VerticalAlignment="Top">
+                    <TextBlock Text="Менеджер Моделей" FontSize="18" Foreground="White" Margin="10" VerticalAlignment="Center" />
+                </DockPanel>
+
+                <Grid Margin="0,15,0,0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+
+                    <!-- Комбо-бокс для выбора модели -->
+                    <ComboBox x:Name="ModelComboBox"
+                              Width="170"
+                              Height="40"
+                              HorizontalAlignment="Left"
+                              VerticalAlignment="Top"
+                              Margin="650,45,0,0"
+                              SelectionChanged="ModelComboBox_SelectionChanged" />
+
+                    <!-- Текстовое поле вывода -->
+                    <TextBox x:Name="OutputTextBox"
+                             Grid.Row="1"
+                             HorizontalAlignment="Stretch"
+                             VerticalAlignment="Stretch"
+                             TextWrapping="Wrap"
+                             AcceptsReturn="True"
+                             VerticalScrollBarVisibility="Auto"
+                             FontFamily="Consolas"
+                             FontSize="14"
+                             Margin="5,10,5,5"
+                             Background="White"
+                             BorderBrush="#ccc" />
+
+                    <!-- Кнопки -->
+                    <StackPanel Orientation="Horizontal" Margin="0,40,0,0" HorizontalAlignment="Left">
+                        <Button x:Name="TrainModelButton" Content="Обучение модели" Click="TrainModelButton_Click" />
+                        <Button x:Name="PredictionButton" Content="Предсказание" Click="PredictionButton_Click" />
+                        <Button x:Name="AddModelButton" Content="Добавить модель" Click="AddModelButton_Click" />
+                        <Button x:Name="RemoveModelButton" Content="Удалить модель" Click="RemoveModelButton_Click" />
+                        <Button x:Name="ClearButton" Content="Очистить" Click="ClearButton_Click" />
+                    </StackPanel>
+                </Grid>
+
+            </Grid>
+
+            <!-- Вкладка "О программе" -->
+            <Grid Name="AboutScreen" Visibility="Collapsed" Background="#f4f4f4">
+                <TextBlock Text="Это приложение для управления моделями." FontSize="16" HorizontalAlignment="Center" VerticalAlignment="Center" />
+            </Grid>
+        </Grid>
+    </DockPanel>
+</Window>
